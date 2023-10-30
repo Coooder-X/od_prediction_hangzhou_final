@@ -1,0 +1,12 @@
+{
+  "region":
+  {
+    "cityname":"hangzhou",
+    "minlon":119.65,
+    "minlat":29.9,
+    "maxlon":120.55,
+    "maxlat":30.55,
+    "cellsize":100.0,
+    "minfreq":100
+  }
+}

@@ -1,0 +1,12 @@
+{
+  "region":
+  {
+    "cityname":"shanghai",
+    "minlon":121.0,
+    "minlat":30.70,
+    "maxlon":121.6,
+    "maxlat":31.40,
+    "cellsize":100.0,
+    "minfreq":100
+  }
+}

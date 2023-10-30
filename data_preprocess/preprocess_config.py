@@ -1,0 +1,1 @@
+DATA_ROOT = r"E:\WST_code\zhijiang_code\OD_prediction_using_trj_future\od_prediction_rebuild_2023.07.31\t2vec_code\data"
