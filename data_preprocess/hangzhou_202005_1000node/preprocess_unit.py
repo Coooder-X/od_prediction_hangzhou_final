@@ -65,6 +65,7 @@ def get_grid(df, MIN_LONGITUDE,MAX_LONGITUDE, MIN_LATITUDE, MAX_LATITUDE,num_row
             # print('outliers:{},{}'.format(lon, lat))
         lon_column = (MAX_LONGITUDE - MIN_LONGITUDE) / num_cols
         lat_row = (MAX_LATITUDE - MIN_LATITUDE) / num_rows
+        # x是纬度，y是经度，和我的项目一致
         grid = int((lon - MIN_LONGITUDE) / lon_column) + int((lat - MIN_LATITUDE) / lat_row) * num_cols
         return grid
     vfunc = np.vectorize(mapping_location_grid)
@@ -123,7 +124,7 @@ def merge_lists(lst):
 
 
 def get_od_matrix(start_time, end_time, order_records, grid_num):
-    print('def get_od_matrix()！', time.strftime('%Y-%m-%d %H:%M:%S', time.localtime(time.time())))
+    print('def get_od_matrix()!', time.strftime('%Y-%m-%d %H:%M:%S', time.localtime(time.time())))
     time_slot = start_time
     density = 0
     m_list = []
@@ -253,7 +254,7 @@ def get_line_graph(OD,index, flow):
 
 
 def get_select_od_matrix(start_time, end_time, order_records, grid_num, vec_future, dic, len_index_list, num_cols):
-    print('def get_od_matrix()！', time.strftime('%Y-%m-%d %H:%M:%S', time.localtime(time.time())))
+    print('def get_od_matrix()!', time.strftime('%Y-%m-%d %H:%M:%S', time.localtime(time.time())))
     time_slot = start_time
     density = 0
     m_list = []

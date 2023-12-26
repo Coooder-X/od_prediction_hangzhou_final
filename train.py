@@ -27,7 +27,9 @@ parser.add_argument('--use_three_branch', type=bool,default=True,help='if use th
 parser.add_argument('--use_dynamic_graph', type=bool,default= False,help='if dynamic graph')
 parser.add_argument('--self_naming',type=str,default="plus_ST_4",help='self_naming')
 parser.add_argument('--grid_num',type=int,default=100,help='grid_num')
-parser.add_argument('--root',type=str,default=r"../data/hangzhou_202005_1000node/split_data_0.25_hour",help='if use vector future')
+print('asdfasdf')
+print('========>', os.listdir('/app/project/wst/'))
+parser.add_argument('--root',type=str,default=r"/app/project/wst/data/hangzhou_202005_1000node/split_data_0.25_hour",help='if use vector future')
 parser.add_argument('--save_folder',type=str,default=r'./result',help='result dir')
 
 parser.add_argument('--len_trend',type=int,default=1,help='length of trend data')
@@ -35,7 +37,7 @@ parser.add_argument('--len_period',type=int,default=1,help='length of period dat
 parser.add_argument('--len_closeness',type=int,default=2,help='length of closeness data')
 parser.add_argument('--train_prop',type=float,default=0.8,help='proportion of training set')
 parser.add_argument('--val_prop',type=float,default=0.2,help='proportion of validation set')
-parser.add_argument('--batch_size',type=int,default=32,help='batch size')
+parser.add_argument('--batch_size',type=int,default=4,help='batch size')
 parser.add_argument('--height',type=int,default=16,help='input flow image height')
 parser.add_argument('--width',type=int,default=16,help='input flow image width')
 parser.add_argument('--latent_dim',type=int,default=128,help='external factor dimension')
@@ -45,8 +47,8 @@ parser.add_argument('--activation',type=str,default='relu',help='edge channel em
 parser.add_argument('--is_batch_normalization',type=bool,default=True,help='edge channel embedding dimension')
 parser.add_argument('--sym_norm',type=bool,default=True,help='SYM_NORM')
 # 新增
-parser.add_argument('--train_batchSize',type=int,default=32,help='train batch size')
-parser.add_argument('--val_batchSize',type=int,default=32,help='val batch size')
+parser.add_argument('--train_batchSize',type=int,default=4,help='train batch size')
+parser.add_argument('--val_batchSize',type=int,default=4,help='val batch size')
 parser.add_argument('--node_num',type=int,default=1000,help='node number')
 parser.add_argument('--num_filters',type=int,default=10,help='number filters')
 # 网络结构，如[h1,h2,h3,h4],则对应的模型结构中的输入输出如下：[h1,h2],[h2,h3],[h3,h4]]
@@ -68,6 +70,7 @@ parser.add_argument('--weight_decay',type=float,default=0,help='weight decay rat
 def get_dataset_args():args = parser.parse_args();return {"len_trend": args.len_trend, "len_period":args.len_period, "len_closeness":args.len_closeness, "train_prop":args.train_prop,"val_prop":args.val_prop}
 def get_args():return parser.parse_args()
 def run_model():
+    print('asdfals;dkjfa;lskdfj')
     args = get_args()
     tensorboard_folder = creat_directory(args)
     writer = SummaryWriter(tensorboard_folder, filename_suffix = "_TrainTime("+start_time +")")

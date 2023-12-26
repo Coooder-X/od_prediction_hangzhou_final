@@ -13,7 +13,7 @@ num_rows, num_cols = R_NUM, C_NUM
 
 # TODO 以后可以进行一定的修改
 def get_od_matrix(start_time, end_time, file_dir, order_records, grid_num, vec_future):
-    print('def get_od_matrix()！', time.strftime('%Y-%m-%d %H:%M:%S', time.localtime(time.time())))
+    print('def get_od_matrix()!', time.strftime('%Y-%m-%d %H:%M:%S', time.localtime(time.time())))
     time_slot = start_time
     density = 0
     m_list = []

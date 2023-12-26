@@ -4,6 +4,10 @@ gc.collect()
 import sys
 # sys.path.append('/app/wst/method/proposed method/od_prediction_hangzhou_final/data_preprocess/hangzhou_202005')
 # sys.path.append('/app/wst/method/proposed method/od_prediction_hangzhou_final/data_preprocess')
+import faulthandler
+# 在import之后直接添加以下启用代码即可
+faulthandler.enable()
+# 后边正常写你的代码
 import os
 print(os.getcwd())
 import pickle
@@ -14,13 +18,13 @@ MAX_LATITUDE = 30.3015
 R_NUM = 10
 C_NUM = 10
 hour_num = 0.25
-node_num = 10000
+node_num = 1000
 GRID_NUM = R_NUM * C_NUM
 num_rows, num_cols = R_NUM, C_NUM
 from data_preprocess.hangzhou_202005.preprocess_unit import *
 # from preprocess_unit import *
 print('------>')
-DATA_ROOT = r"/app/project/wst/data"
+DATA_ROOT = r"/app/wst/data/hangzhou_202005_1000node"
 start_time = time.time()
 
 '''
@@ -33,6 +37,7 @@ start_time = time.time()
 '''
 # 打开并读取h5文件
 # 指定 CSV 文件的路径
+print('DATA_ROOT', DATA_ROOT)
 file_path = os.path.join(DATA_ROOT,"raw_data/train.feather")
 print('===========>', file_path, os.path.exists(file_path))
 row_data = pd.read_feather(file_path)
@@ -88,7 +93,7 @@ df10 = df10.reset_index()
 df10.to_feather(os.path.join(DATA_ROOT,"temp_data/train_all_temp_" + str(GRID_NUM) + ".feather"))
 del df,df2,df3,df4
 
-
+print('aosidaofjhashjdkfasdfadfdjf')
 #%%
 '''
 第三步，筛选节点
@@ -118,11 +123,16 @@ matrix_all, density = get_od_matrix(start_time=0, end_time=time_steps,
 print(matrix_all.shape)
 grid_num = num_rows * num_cols
 # matrix_all_od = np.reshape(matrix_all.values, (-1, grid_num, grid_num))
+# matrix_all_od 为形状为 (2970, 100, 100) 的矩阵, 即 2970 个时间片, 每个时间片的OD需求矩阵为 100*100 大小
 matrix_all_od = matrix_all
+# OD_data 是将 matrix_all_od 的后2维展平了, 形状为 (2970, 10000)
 OD_data = torch.from_numpy(matrix_all_od.reshape(matrix_all_od.shape[0], -1))
+# p_num 是对所有时间片里的每个OD对流量计算均值, 形状是 (10000)
 p_num = OD_data[:, :].mean(dim=0)
+# 筛选出OD流量最大的 node_num(node_num为1000,则一共会取1001个) 个 OD 对, selet 是一个 (10000) 的元素为 bool 类型的数组,里面有1001个True
 selet = np.where(p_num >= np.sort(p_num, axis=0)[-node_num], True, False)
 index = torch.linspace(0, len(selet) - 1, len(selet)).int()
+# OD_node 是用 selet 获取了最大OD流量的前 1001 个OD对的流量, 形状是 (2970, 1001)
 OD_node = OD_data.permute(1, 0)[selet].permute(1, 0)
 matrix_flow = matrix_all_od.sum(axis=-1)
 np.savez(os.path.join(DATA_ROOT,'temp_data/od_matrix_' + str(GRID_NUM) + '.npz'), data=matrix_all)

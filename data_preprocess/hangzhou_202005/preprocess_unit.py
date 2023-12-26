@@ -1,3 +1,5 @@
+# import sys
+# sys.path.append('/app/wst/method/proposed method/od_prediction_hangzhou_final/data_preprocess')
 import numpy as np
 import time
 import pandas as pd
@@ -123,7 +125,8 @@ def merge_lists(lst):
 
 
 def get_od_matrix(start_time, end_time, order_records, grid_num):
-    print('def get_od_matrix()！', time.strftime('%Y-%m-%d %H:%M:%S', time.localtime(time.time())))
+    #-------------------
+    print('def get_od_matrix()', time.strftime('%Y-%m-%d %H:%M:%S', time.localtime(time.time())))
     time_slot = start_time
     density = 0
     m_list = []
@@ -253,7 +256,7 @@ def get_line_graph(OD,index, flow):
 
 
 def get_select_od_matrix(start_time, end_time, order_records, grid_num, vec_future, dic, len_index_list, num_cols):
-    print('def get_od_matrix()！', time.strftime('%Y-%m-%d %H:%M:%S', time.localtime(time.time())))
+    print('def get_od_matrix()!', time.strftime('%Y-%m-%d %H:%M:%S', time.localtime(time.time())))
     time_slot = start_time
     density = 0
     m_list = []
@@ -379,4 +382,4 @@ def get_random_dataloader(len_trend, len_period, len_closeness, train_prop, val_
     np.savez(os.path.join(save_path, "val" + str(NODE_NUM) + ".npz"), data=val_flow_data, lable=val_flow_label)
 
 
-
+# flow_data,  flow_label = create_seq(1, 1, 2, os.path.join('/app/wst/data/hangzhou_202005_1000node',"line_graph_data"), 100, False, hour_num=0.25)

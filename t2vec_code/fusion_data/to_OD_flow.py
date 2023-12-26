@@ -268,7 +268,7 @@ import matplotlib.pyplot as plt
 # 在文献中使用的是完整的OD矩阵
 # TODO 以后可以进行一定的修改
 def get_od_matrix(start_time, end_time, file_dir, order_records, grid_num):
-    print('def get_od_matrix()！', time.strftime('%Y-%m-%d %H:%M:%S', time.localtime(time.time())))
+    print('def get_od_matrix()!', time.strftime('%Y-%m-%d %H:%M:%S', time.localtime(time.time())))
     time_slot = start_time
     density = 0
     m_list = []
